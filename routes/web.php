@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'App\Http\Controllers\HomesController@index');
+Route::get('/search', 'App\Http\Controllers\HomesController@search');
 
 Route::post('getStates',[StateController::class,'getStates'])->name('getStates');
 Route::post('getCIties',[CityController::class,'getCities'])->name('getCities');

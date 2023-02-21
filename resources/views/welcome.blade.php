@@ -44,6 +44,24 @@
                             </select>
                         </div>
                     </div>
+
+
+    <section class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h5>Search by Ajax</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="search" name="search" id="search" class="form-control" placeholder="Search your area...">
+                            <div>
+                                <div id="Content"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,6 +70,30 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('#search').on('keyup', function(){
+            $value = $(this).val();
+            if($value){
+
+                $.ajax({
+                    type:'get',
+                    url:'{{ URL::to('search')}}',
+                    data:{'search':$value},
+
+                    success:function(data)
+                    {
+                        console.log(data);
+                        $('#Content').html(data);
+                    }
+                });
+
+            }else{
+                $('#Content').html('');
+            }
+        })
+
+    </script>
+
     <script type="text/javascript">
         $('#country').on('change', function() {
                 get_state_by_country();
